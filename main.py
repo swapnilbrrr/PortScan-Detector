@@ -1,6 +1,14 @@
 from scanner.port_scan import PortScanner
 from scanner.utils import setup_logger
 import os
+import logging
+
+logging.basicConfig(
+    filename='logs/scan.log',  # log file path
+    level=logging.INFO,        # log everything info or higher
+    format='[%(asctime)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 def main():
     os.makedirs("logs", exist_ok=True)

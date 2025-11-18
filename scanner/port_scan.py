@@ -1,4 +1,5 @@
 import socket
+import logging
 from typing import List
 from .utils import timestamp
 
@@ -23,12 +24,16 @@ class PortScanner:
     def run_scan(self) -> List[int]:
         """Scans ports in the configured range."""
         print(f"[{timestamp()}] Starting scan on {self.target}...\n")
+        logging.info(f"Starting scan on {self.target}...")
+
         open_ports = []
 
         for port in range(self.start_port, self.end_port + 1):
             if self.scan_port(port):
                 print(f"[+] Port {port} is OPEN")
+                logging.info(f"Port {port} is OPEN")   # <-- the added part
                 open_ports.append(port)
 
         print(f"\n[{timestamp()}] Scan completed.")
+        logging.info(f"Scan completed on {self.target}")
         return open_ports
