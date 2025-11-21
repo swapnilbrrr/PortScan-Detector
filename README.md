@@ -32,7 +32,7 @@ Generates timestamped logs in `logs/scan.log`, structured for SIEM-style ingesti
 
 ### **⚡ Concurrent Scanning**
 
-Uses `ThreadPoolExecutor` for high‑speed enumeration of TCP ports.
+Uses `Fast multi-threaded scanning` for high‑speed enumeration of TCP ports.
 
 ### **🧩 Modular Architecture**
 
