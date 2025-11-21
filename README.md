@@ -1,4 +1,4 @@
-# **Network Security Auditor (Port-Scan-Detector)**
+# **Network Security Auditor (Port‑Scan‑Detector)**
 
 **Author:** Swapnil Katuwal
 **Role:** SOC Analyst / Cybersecurity Researcher
@@ -8,60 +8,68 @@
 
 ## 🛡️ **Project Overview**
 
-A modular network enumeration tool designed to emulate the **Reconnaissance** and **Vulnerability Assessment** phases of the Cyber Kill Chain.
+Port‑Scan‑Detector is a modular network enumeration tool that replicates key stages of the **Reconnaissance** and **Vulnerability Assessment** phases of the Cyber Kill Chain.
 
-Unlike simple connectivity checkers, this tool emphasizes:
+Unlike basic port checkers, this tool focuses on security‑centric techniques:
 
-* **Service Identification** (via banner grabbing)
-* **Forensic Logging** (timestamped audit trails)
-* **Socket-Level Behavior Analysis** (open/closed/filtered detection)
+* **Service Identification** via banner grabbing
+* **Forensic Logging** with timestamped trails
+* **Socket‑Level Behavior Analysis** (open / closed / filtered detection)
 
-This makes the auditor suitable for **SOC analysis**, **security labs**, and **blue-team simulations**.
+Designed for **SOC analysts**, **blue‑team labs**, and **defensive security research**.
 
 ---
 
 ## 🚀 **Key Features**
 
-* **Service Version Detection**
-  Performs banner grabbing for HTTP, SSH, RPC and more to identify exposed or outdated services.
+### **🔎 Service Version Detection**
 
-* **Forensic Logging**
-  Automatically generates timestamped logs in `logs/scan.log`, imitating SIEM-style ingestion.
+Banner grabbing for common services (HTTP, SSH, FTP, RPC) to detect exposed or outdated versions.
 
-* **Custom TCP State Analysis**
-  Uses socket-level low-level connection attempts to distinguish:
-  **Open**, **Closed**, **Filtered** (firewall-dropped).
+### **📁 Forensic Logging**
 
-* **Modular Architecture**
-  Clean separation between scanning logic, utilities, and logging for maintainability and scalability.
+Generates timestamped logs in `logs/scan.log`, structured for SIEM-style ingestion.
+
+### **⚡ Concurrent Scanning**
+
+Uses `ThreadPoolExecutor` for high‑speed enumeration of TCP ports.
+
+### **🧩 Modular Architecture**
+
+Clear separation between scanning engine, helper utilities, and logging components — designed for future scalability.
 
 ---
 
 ## 📌 **Usage**
 
-### **1. Run the Auditor**
+### 1️⃣ Run the Auditor
 
 ```bash
 python main.py
 ```
 
-### **2. Input Target**
+### 2️⃣ Enter Target
 
-Enter a valid IP or hostname (e.g., `192.168.1.1` or `scanme.nmap.org`).
+Example:
 
-### **3. Review Logs**
+```
+192.168.1.1
+scanme.nmap.org
+```
 
-Scan results are saved in:
+### 3️⃣ Review Logs
+
+Logs generated under:
 
 ```
 logs/scan.log
 ```
 
-Each entry includes:
+Each record includes:
 
 * Timestamp
-* Port state
-* Service banner (if captured)
+* Port number & state
+* Normalized service banner
 
 ---
 
@@ -70,27 +78,25 @@ Each entry includes:
 ```
 Port-Scan-Detector/
 │
-├── main.py                 # Entry point for the auditor
+├── main.py                 # Entry point
 ├── README.md               # Documentation
 ├── .gitignore
 │
-├── scanner/                # Core Logic Module
+├── scanner/                # Core scanning engine
 │   ├── __init__.py
-│   ├── port_scan.py        # Socket connection & banner grabbing logic
-│   └── utils.py            # Logging & timestamp helpers
+│   ├── port_scan.py        # Socket connections & banner grabbing
+│   └── utils.py            # Helper functions (timestamp, log writer)
 │
-├── logs/                   
-│   └── sample.log          # Example scan output
+├── logs/
+│   └── scan.log            # Generated scan logs
 │
 └── tests/
-    └── test_scanner.py     # Unit tests for scanner reliability
+    └── test_scanner.py     # Pytest unit tests
 ```
 
 ---
 
 ## 🧪 **Running Tests**
-
-Ensure scanning reliability and proper error-handling:
 
 ```bash
 pytest
@@ -100,21 +106,19 @@ pytest
 
 ## ✨ **Roadmap & Future Improvements**
 
-* **Multithreading Support**
-  For high-speed scanning similar to Nmap’s "Insane" timing.
-
 * **CVE Mapping**
-  Auto-correlate banners with known vulnerabilities using CVE databases.
+  Correlate service banners with known vulnerabilities.
 
-* **JSON Export Mode**
-  For direct ingestion into ELK, Splunk, or custom SOC dashboards.
+* **JSON Output Mode**
+  Export structured results for ELK, Splunk, or custom SOC dashboards.
 
-* **SYN Scan Mode**
-  Implement raw socket-based stealth scanning.
+* **SYN Stealth Scan**
+  Raw-socket based half‑open scanning.
 
 ---
 
 ## 📜 **Disclaimer**
 
-This tool is developed strictly for **educational** and **authorized security auditing** purposes.
-Unauthorized scanning of networks is a violation of cybersecurity laws.
+This tool is intended for **educational** and **authorized security auditing** only.
+Unauthorized network scanning may be illegal in your jurisdiction.
+
